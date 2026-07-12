@@ -1,0 +1,178 @@
+import AppBar from "@mui/material/AppBar";
+import Box from "@mui/material/Box";
+import Toolbar from "@mui/material/Toolbar";
+import IconButton from "@mui/material/IconButton";
+import Typography from "@mui/material/Typography";
+import Menu from "@mui/material/Menu";
+import MenuIcon from "@mui/icons-material/Menu";
+import Container from "@mui/material/Container";
+import Avatar from "@mui/material/Avatar";
+import Button from "@mui/material/Button";
+import Tooltip from "@mui/material/Tooltip";
+import MenuItem from "@mui/material/MenuItem";
+import AdbIcon from "@mui/icons-material/Adb";
+import { assets } from "../frontend_assets/assets";
+import { NavLink } from "react-router-dom";
+import { useState } from "react";
+import Badge from "@mui/material/Badge";
+
+const pages = ["Home", "Collections", "About", "Contact"];
+const settings = ["My Profile", "Orders", "Logout"];
+
+function NavBar() {
+  const [anchorElNav, setAnchorElNav] = useState(null);
+  const [anchorElUser, setAnchorElUser] = useState(null);
+
+  const handleOpenNavMenu = (event) => {
+    setAnchorElNav(event.currentTarget);
+  };
+  const handleOpenUserMenu = (event) => {
+    setAnchorElUser(event.currentTarget);
+  };
+
+  const handleCloseNavMenu = () => {
+    setAnchorElNav(null);
+  };
+
+  const handleCloseUserMenu = () => {
+    setAnchorElUser(null);
+  };
+
+  return (
+    <AppBar position="static" sx={{ backgroundColor: "white", color: "black" }}>
+      <Container maxWidth="xl">
+        <Toolbar
+          disableGutters
+          sx={{
+            justifyContent: "space-between",
+            alignItems: "center",
+          }}
+        >
+          <img
+            src={assets.logo}
+            alt="Logo"
+            style={{ width: "100px", height: "auto" }}
+          />
+          <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
+            <IconButton
+              size="large"
+              aria-label="account of current user"
+              aria-controls="menu-appbar"
+              aria-haspopup="true"
+              onClick={handleOpenNavMenu}
+              color="inherit"
+            >
+              <MenuIcon />
+            </IconButton>
+            <Menu
+              id="menu-appbar"
+              anchorEl={anchorElNav}
+              anchorOrigin={{
+                vertical: "bottom",
+                horizontal: "left",
+              }}
+              keepMounted
+              transformOrigin={{
+                vertical: "top",
+                horizontal: "left",
+              }}
+              open={Boolean(anchorElNav)}
+              onClose={handleCloseNavMenu}
+              sx={{ display: { xs: "block", md: "none" } }}
+            >
+              {pages.map((page) => (
+                <MenuItem key={page} onClick={handleCloseNavMenu}>
+                  <NavLink
+                    to={page === "Home" ? "/" : `/${page.toLowerCase()}`}
+                    style={{ textDecoration: "none", color: "black" }}
+                  >
+                    <Typography textAlign="center">{page}</Typography>
+                  </NavLink>
+                </MenuItem>
+              ))}
+            </Menu>
+          </Box>
+
+          <Box
+            sx={{
+              flex: 1,
+              display: { xs: "none", md: "flex" },
+              justifyContent: "center",
+              gap: 3,
+            }}
+          >
+            {pages.map((page) => (
+              <NavLink
+                key={page}
+                to={page === "Home" ? "/" : `/${page.toLowerCase()}`}
+                style={({ isActive }) => ({
+                  textDecoration: isActive ? "underline" : "none",
+                  color: "black",
+
+                  fontSize: "1.4rem",
+                })}
+              >
+                <p>{page}</p>
+              </NavLink>
+            ))}
+          </Box>
+          <Box
+            sx={{ flexGrow: 0, display: "flex", gap: 3, alignItems: "center" }}
+          >
+            <Tooltip title="Search">
+              <IconButton x={{ p: 0 }}>
+                <img
+                  src={assets.search_icon}
+                  alt="Search"
+                  width="24"
+                  height="24"
+                />
+              </IconButton>
+            </Tooltip>
+            <Tooltip title="Open settings">
+              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                <img
+                  src={assets.profile_icon}
+                  alt="Profile"
+                  width="24"
+                  height="24"
+                />
+              </IconButton>
+            </Tooltip>
+            <Tooltip title="Cart">
+              <Badge badgeContent={17} color="error">
+                <img src={assets.cart_icon} alt="Cart" width="24" height="24" />
+              </Badge>
+            </Tooltip>
+
+            <Menu
+              sx={{ mt: "45px" }}
+              id="menu-appbar"
+              anchorEl={anchorElUser}
+              anchorOrigin={{
+                vertical: "top",
+                horizontal: "right",
+              }}
+              keepMounted
+              transformOrigin={{
+                vertical: "top",
+                horizontal: "right",
+              }}
+              open={Boolean(anchorElUser)}
+              onClose={handleCloseUserMenu}
+            >
+              {settings.map((setting) => (
+                <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                  <Typography sx={{ textAlign: "center" }}>
+                    {setting}
+                  </Typography>
+                </MenuItem>
+              ))}
+            </Menu>
+          </Box>
+        </Toolbar>
+      </Container>
+    </AppBar>
+  );
+}
+export default NavBar;
