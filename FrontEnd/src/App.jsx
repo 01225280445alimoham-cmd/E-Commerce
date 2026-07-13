@@ -14,7 +14,14 @@ import "./index.css";
 
 const App = () => {
   return (
-    <div>
+    <div
+      style={{
+        minHeight: "100vh",
+        width: "80vw",
+        alignSelf: "center",
+        margin: "0 auto",
+      }}
+    >
       <NavBar />
       <Routes>
         <Route path="/" element={<Home />}></Route>
