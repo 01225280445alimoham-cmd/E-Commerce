@@ -1,0 +1,18 @@
+.best-sallers {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.header {
+  max-width: 700px;
+  text-align: center;
+}
+
+.best-sallers-collections-description {
+  margin: 0;
+  color: #666;
+  font-size: 16px;
+  line-height: 1.7;
+}

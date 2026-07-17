@@ -11,7 +11,7 @@ import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
-import { assets } from "../frontend_assets/assets";
+import { assets } from "../assets/frontend_assets/assets";
 import { NavLink } from "react-router-dom";
 import { useState } from "react";
 import Badge from "@mui/material/Badge";
@@ -94,7 +94,7 @@ function NavBar() {
                     to={page === "Home" ? "/" : `/${page.toLowerCase()}`}
                     style={{ textDecoration: "none", color: "black" }}
                   >
-                    <Typography textAlign="center">{page}</Typography>
+                    <Typography>{page}</Typography>
                   </NavLink>
                 </MenuItem>
               ))}

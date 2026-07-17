@@ -9,7 +9,7 @@ import Cart from "./pages/Cart";
 import Collection from "./pages/Collections";
 import About from "./pages/About";
 import Contant from "./pages/Contant";
-import NavBar from "./assets/Components/NavBar";
+import NavBar from "./Components/NavBar";
 import "./index.css";
 
 const App = () => {

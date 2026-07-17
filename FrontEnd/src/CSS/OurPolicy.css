@@ -1,0 +1,42 @@
+.our-policy-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
+  gap: 30px;
+  flex-wrap: wrap;
+  margin: 50px 0;
+}
+
+.policy {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 8px;
+  max-width: 250px;
+}
+
+.policy img {
+  width: 55px;
+  height: 55px;
+}
+
+.policy h3 {
+  margin: 10px 0 0;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.policy p {
+  margin: 0;
+  color: #666;
+  line-height: 1.6;
+  font-size: 14px;
+}
+
+@media (max-width: 768px) {
+  .our-policy-container {
+    flex-direction: column;
+    align-items: center;
+  }
+}
