@@ -18,7 +18,7 @@ const LastetCollections = () => {
   }, []);
 
   return (
-    <div className="latest-collections">
+    <div className="latest-collections" style={{ width: "100%" }}>
       <div className="latest-collections-header">
         <Title text1={"LATEST"} text2={"COLLECTIONS"} />
 
@@ -28,16 +28,17 @@ const LastetCollections = () => {
         </p>
       </div>
 
-      <div>
+      <div style={{ width: "100%" }}>
         <Grid
           container
           spacing={{ xs: 2, md: 3 }}
           sx={{
             justifyContent: "center",
           }}
+          columns={{ xs: 12, sm: 12, md: 12, lg: 10 }}
         >
           {latestProducts.map((item) => (
-            <Grid key={item._id} size={{ xs: 6, sm: 6, md: 4, lg: 3 }}>
+            <Grid key={item._id} size={{ xs: 12, sm: 6, md: 4, lg: 2.4 }}>
               <ProductItem
                 id={item._id}
                 name={item.name}

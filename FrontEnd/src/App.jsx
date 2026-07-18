@@ -11,6 +11,7 @@ import About from "./pages/About";
 import Contant from "./pages/Contant";
 import NavBar from "./Components/NavBar";
 import "./index.css";
+import Footer from "./Components/Footer";
 
 const App = () => {
   return (
@@ -34,6 +35,7 @@ const App = () => {
         <Route path="/about" element={<About />}></Route>
         <Route path="/contact" element={<Contant />}></Route>
       </Routes>
+      <Footer />
     </div>
   );
 };

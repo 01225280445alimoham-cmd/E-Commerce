@@ -1,11 +1,98 @@
-import React from 'react'
+import React, { useState, useContext, useEffect } from "react";
+import "../CSS/Collections.css";
+import { assets } from "../assets/frontend_assets/assets";
+import Title from "../Components/Title";
+import { ShopContext } from "../contexts/shopContext";
+import ProductItem from "../Components/ProductItem";
+
+import Grid from "@mui/material/Grid";
 
 const Collections = () => {
-  return (
-    <div>
-      
-    </div>
-  )
-}
+  const categories = ["Men", "Women", "Kids"];
+  const typeCategories = ["Topwear", "Bottomwear", "Winterwear"];
 
-export default Collections
+  const [showCategory, setShowCategory] = useState(false);
+
+  const { products } = useContext(ShopContext);
+
+  const [allProducts, setAllProducts] = useState([]);
+
+  useEffect(() => {
+    setAllProducts(products);
+  }, []);
+
+  return (
+    <section className="collections">
+      <div className="filters">
+        <div className="row">
+          <h2>Filters</h2>
+          <button
+            className="filter-btn"
+            onClick={() => {
+              setShowCategory(!showCategory);
+            }}
+          >
+            <img
+              src={assets.dropdown_icon}
+              alt=""
+              style={{
+                transform: showCategory ? "rotate(90deg)" : "rotate(0deg)",
+                transition: "transform 0.3s ease",
+              }}
+            />
+          </button>
+        </div>
+        <div className={`categorys ${showCategory ? "show" : "hide"}`}>
+          <div className="category-container">
+            <h3>Category</h3>
+            {categories.map((c) => {
+              return (
+                <div key={c} className="category">
+                  <input type="checkbox" value={c} />
+                  <p>{c}</p>
+                </div>
+              );
+            })}
+          </div>
+          <div className="category-container">
+            <h3>Type</h3>
+            {typeCategories.map((c) => {
+              return (
+                <div key={c} className="category">
+                  <input type="checkbox" value={c} />
+                  <p>{c}</p>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </div>
+
+      <div className="right-side">
+        <header>
+          <Title text1={"ALL"} text2={"COLLECTIONS"} />
+        </header>
+
+        <Grid
+          container
+          sx={{
+            justifyContent: "center",
+          }}
+        >
+          {allProducts.map((item) => (
+            <Grid key={item._id} size={{ xs: 12, sm: 6, md: 4, lg: 2.4 }}>
+              <ProductItem
+                id={item._id}
+                name={item.name}
+                image={item.image}
+                price={item.price}
+              />
+            </Grid>
+          ))}
+        </Grid>
+      </div>
+    </section>
+  );
+};
+
+export default Collections;

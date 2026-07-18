@@ -3,6 +3,7 @@
   text-decoration: none;
   color: inherit;
   transition: transform 0.3s ease;
+  width: 100%;
 }
 
 .product-item:hover {
@@ -12,11 +13,12 @@
 .product-image-container {
   overflow: hidden;
   border-radius: 8px;
+  width: 100%;
 }
 
 .product-image {
-  width: 100%;
-  height: 350px;
+  width: 80%;
+  height: 250px;
   object-fit: cover;
   display: block;
   transition: transform 0.4s ease;
@@ -42,7 +44,7 @@
 @media (max-width: 768px) {
   .product-image {
     width: 100%;
-    height: 250px;
+    height: 450px;
   }
 
   .product-name {
@@ -56,6 +58,6 @@
 
 @media (max-width: 480px) {
   .product-image {
-    height: 200px;
+    height: 350px;
   }
 }
