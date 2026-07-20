@@ -1,0 +1,21 @@
+.search-contianer {
+  margin: 20px 0px;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+.search-input {
+  width: 60%;
+  padding: 10px;
+  border-radius: 12px;
+  border: 1px solid gray;
+}
+.search-contianer button {
+  border-radius: 8px;
+  background-color: white;
+  border: none;
+  cursor: pointer;
+}
+.search-icon {
+  width: 25px;
+}

@@ -12,6 +12,7 @@ import Contant from "./pages/Contant";
 import NavBar from "./Components/NavBar";
 import "./index.css";
 import Footer from "./Components/Footer";
+import Search from "./Components/Search";
 
 const App = () => {
   return (
@@ -24,6 +25,7 @@ const App = () => {
       }}
     >
       <NavBar />
+      <Search />
       <Routes>
         <Route path="/" element={<Home />}></Route>
         <Route path="/product/:id" element={<Product />}></Route>

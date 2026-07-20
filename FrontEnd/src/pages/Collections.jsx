@@ -17,9 +17,61 @@ const Collections = () => {
 
   const [allProducts, setAllProducts] = useState([]);
 
+  const [selectedCategories, setSelectedCategories] = useState([]);
+  const [selectedTypeCategories, setSelectedTypeCategories] = useState([]);
+
+  const toggleCategories = (e) => {
+    if (selectedCategories.includes(e.target.value)) {
+      setSelectedCategories((prev) =>
+        prev.filter((item) => item !== e.target.value),
+      );
+    } else {
+      setSelectedCategories((prev) => [...prev, e.target.value]);
+    }
+  };
+
+  const toggleTypeCategories = (e) => {
+    if (selectedTypeCategories.includes(e.target.value)) {
+      setSelectedTypeCategories((prev) =>
+        prev.filter((item) => item !== e.target.value),
+      );
+    } else {
+      setSelectedTypeCategories((prev) => [...prev, e.target.value]);
+    }
+  };
+
+  const applyFilter = () => {
+    let productsCopy = products.slice();
+
+    if (selectedCategories.length > 0) {
+      productsCopy = products.filter((item) =>
+        selectedCategories.includes(item.category),
+      );
+    }
+
+    if (selectedTypeCategories.length > 0) {
+      productsCopy = products.filter((item) =>
+        selectedTypeCategories.includes(item.subCategory),
+      );
+    }
+
+    if (selectedCategories.length > 0 && selectedTypeCategories.length > 0) {
+      productsCopy = products.filter((item) => {
+        if (
+          selectedTypeCategories.includes(item.subCategory) &&
+          selectedCategories.includes(item.category)
+        ) {
+          return item;
+        }
+      });
+    }
+
+    setAllProducts(productsCopy);
+  };
+
   useEffect(() => {
-    setAllProducts(products);
-  }, []);
+    applyFilter();
+  }, [selectedCategories, selectedTypeCategories]);
 
   return (
     <section className="collections">
@@ -48,7 +100,7 @@ const Collections = () => {
             {categories.map((c) => {
               return (
                 <div key={c} className="category">
-                  <input type="checkbox" value={c} />
+                  <input type="checkbox" value={c} onClick={toggleCategories} />
                   <p>{c}</p>
                 </div>
               );
@@ -59,7 +111,11 @@ const Collections = () => {
             {typeCategories.map((c) => {
               return (
                 <div key={c} className="category">
-                  <input type="checkbox" value={c} />
+                  <input
+                    type="checkbox"
+                    value={c}
+                    onClick={toggleTypeCategories}
+                  />
                   <p>{c}</p>
                 </div>
               );

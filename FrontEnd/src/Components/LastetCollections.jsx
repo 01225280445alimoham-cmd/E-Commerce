@@ -35,7 +35,6 @@ const LastetCollections = () => {
           sx={{
             justifyContent: "center",
           }}
-          columns={{ xs: 12, sm: 12, md: 12, lg: 10 }}
         >
           {latestProducts.map((item) => (
             <Grid key={item._id} size={{ xs: 12, sm: 6, md: 4, lg: 2.4 }}>
