@@ -13,8 +13,9 @@ import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
 import { assets } from "../assets/frontend_assets/assets";
 import { NavLink } from "react-router-dom";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import Badge from "@mui/material/Badge";
+import { ShopContext } from "../contexts/shopContext";
 
 const pages = ["Home", "Collections", "About", "Contact"];
 const settings = ["My Profile", "Orders", "Logout"];
@@ -22,6 +23,8 @@ const settings = ["My Profile", "Orders", "Logout"];
 function NavBar() {
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
+
+  const { showSearch, setShowSearch } = useContext(ShopContext);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -127,7 +130,12 @@ function NavBar() {
           <Box
             sx={{ flexGrow: 0, display: "flex", gap: 3, alignItems: "center" }}
           >
-            <Tooltip title="Search">
+            <Tooltip
+              title="Search"
+              onClick={() => {
+                setShowSearch(!showSearch);
+              }}
+            >
               <IconButton x={{ p: 0 }}>
                 <img
                   src={assets.search_icon}

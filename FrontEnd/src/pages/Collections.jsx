@@ -13,7 +13,7 @@ const Collections = () => {
 
   const [showCategory, setShowCategory] = useState(false);
 
-  const { products } = useContext(ShopContext);
+  const { products, search, showSearch } = useContext(ShopContext);
 
   const [allProducts, setAllProducts] = useState([]);
 
@@ -43,6 +43,12 @@ const Collections = () => {
   const applyFilter = () => {
     let productsCopy = products.slice();
 
+    if (search && showSearch) {
+      productsCopy = products.filter((item) =>
+        item.name.toLowerCase().includes(search.toLowerCase()),
+      );
+    }
+
     if (selectedCategories.length > 0) {
       productsCopy = products.filter((item) =>
         selectedCategories.includes(item.category),
@@ -71,7 +77,7 @@ const Collections = () => {
 
   useEffect(() => {
     applyFilter();
-  }, [selectedCategories, selectedTypeCategories]);
+  }, [selectedCategories, selectedTypeCategories, search]);
 
   return (
     <section className="collections">
