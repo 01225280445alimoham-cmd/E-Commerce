@@ -20,6 +20,11 @@
   line-height: 1.7;
 }
 
+.products-grid {
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 20px;
+}
+
 /* Responsive */
 
 @media (max-width: 768px) {

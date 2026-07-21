@@ -120,7 +120,7 @@ const Collections = () => {
                   <input
                     type="checkbox"
                     value={c}
-                    onClick={toggleTypeCategories}
+                    onChange={toggleTypeCategories}
                   />
                   <p>{c}</p>
                 </div>
@@ -135,23 +135,17 @@ const Collections = () => {
           <Title text1={"ALL"} text2={"COLLECTIONS"} />
         </header>
 
-        <Grid
-          container
-          sx={{
-            justifyContent: "center",
-          }}
-        >
+        <div className="products-grid">
           {allProducts.map((item) => (
-            <Grid key={item._id} size={{ xs: 12, sm: 6, md: 4, lg: 2.4 }}>
-              <ProductItem
-                id={item._id}
-                name={item.name}
-                image={item.image}
-                price={item.price}
-              />
-            </Grid>
+            <ProductItem
+              key={item._id}
+              id={item._id}
+              name={item.name}
+              image={item.image}
+              price={item.price}
+            />
           ))}
-        </Grid>
+        </div>
       </div>
     </section>
   );

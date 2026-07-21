@@ -26,24 +26,17 @@ const BestSaller = () => {
       </div>
 
       <div style={{ width: "100%" }}>
-        <Grid
-          container
-          spacing={{ xs: 2, md: 3 }}
-          sx={{
-            justifyContent: "center",
-          }}
-        >
+        <div className="products-grid">
           {bestSallers.map((item) => (
-            <Grid key={item._id} size={{ xs: 12, sm: 6, md: 4, lg: 2.4 }}>
-              <ProductItem
-                id={item._id}
-                name={item.name}
-                image={item.image}
-                price={item.price}
-              />
-            </Grid>
+            <ProductItem
+              key={item._id}
+              id={item._id}
+              name={item.name}
+              image={item.image}
+              price={item.price}
+            />
           ))}
-        </Grid>
+        </div>
       </div>
     </div>
   );

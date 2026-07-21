@@ -1,10 +1,26 @@
 .collections {
   display: flex;
-  gap: 20px;
+  gap: 30px;
+  width: 100%;
 }
 
+/* قسم المنتجات */
+.right-side {
+  flex: 1;
+  min-width: 0;
+}
+
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 30px;
+  width: 100%;
+}
+
+/* الفلاتر */
 .filters {
   margin-top: 25px;
+  flex-shrink: 0;
 }
 
 .filters h2 {
@@ -52,6 +68,7 @@
   color: #555;
 }
 
+/* إظهار وإخفاء الفلاتر */
 .categorys.show {
   display: block;
 }
@@ -67,7 +84,6 @@
 .filter-btn img {
   width: 18px;
   height: 18px;
-  transition: transform 0.3s ease;
 }
 
 .filter-btn:hover {
@@ -85,31 +101,46 @@
   gap: 10px;
 }
 
-/* Responsive */
+/* Tablet */
+@media (max-width: 900px) {
+  .products-grid {
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 20px;
+  }
 
+  .category-container {
+    width: 130px;
+  }
+}
+
+/* Mobile */
 @media (max-width: 768px) {
   .collections {
     flex-direction: column;
-    padding: 20px;
+  }
+
+  .products-grid {
+    grid-template-columns: 1fr;
   }
 
   .filters {
     width: 100%;
   }
+
   .filter-btn {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 20px;
-    height: 20px;
+    width: 25px;
+    height: 25px;
     border: 1px solid #ddd;
     border-radius: 4px;
     background-color: #fff;
     cursor: pointer;
-    transition: all 0.3s ease;
   }
 }
-@media (min-width: 768px) {
+
+@media (min-width: 769px) {
   .categorys {
     display: block !important;
   }
