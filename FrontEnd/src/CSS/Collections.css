@@ -12,9 +12,16 @@
 
 .products-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
   gap: 30px;
   width: 100%;
+}
+
+.no-results {
+  color: #777;
+  font-size: 15px;
+  text-align: center;
+  padding: 60px 0;
 }
 
 /* الفلاتر */
@@ -62,13 +69,18 @@
   cursor: pointer;
 }
 
+.category input:focus-visible {
+  outline: 2px solid #000;
+  outline-offset: 2px;
+}
+
 .category p {
   margin: 0;
   font-size: 13px;
   color: #555;
 }
 
-/* إظهار وإخفاء الفلاتر */
+/* إظهار وإخفاء الفلاتر (موبايل بس) */
 .categorys.show {
   display: block;
 }
@@ -95,6 +107,11 @@
   transform: scale(0.95);
 }
 
+.filter-btn:focus-visible {
+  outline: 2px solid #000;
+  outline-offset: 2px;
+}
+
 .row {
   display: flex;
   align-items: center;
@@ -102,7 +119,7 @@
 }
 
 /* Tablet */
-@media (max-width: 900px) {
+@media (max-width: 800px) {
   .products-grid {
     grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
     gap: 20px;
@@ -114,7 +131,7 @@
 }
 
 /* Mobile */
-@media (max-width: 768px) {
+@media (max-width: 765px) {
   .collections {
     flex-direction: column;
   }
@@ -124,6 +141,10 @@
   }
 
   .filters {
+    width: 100%;
+  }
+
+  .category-container {
     width: 100%;
   }
 
@@ -140,8 +161,10 @@
   }
 }
 
-@media (min-width: 769px) {
-  .categorys {
-    display: block !important;
+/* على الديسكتوب الفلاتر ظاهرة دايمًا، بغض النظر عن show/hide */
+@media (min-width: 766px) {
+  .categorys.hide,
+  .categorys.show {
+    display: block;
   }
 }

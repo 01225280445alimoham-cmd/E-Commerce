@@ -1,7 +1,13 @@
+:root {
+  --product-border: #e5e5e5;
+  --product-muted-text: #595955;
+}
+
 .grid {
   display: grid;
   grid-template-columns: 140px 1fr 1.2fr;
   gap: 40px;
+  max-width: 1200px;
   margin: 40px auto;
   align-items: start;
 }
@@ -15,15 +21,22 @@
 
 .images-contianer img {
   width: 100%;
-  border: 1px solid #e5e5e5;
+  height: 120px;
+  object-fit: cover;
+  border: 1px solid var(--product-border);
   border-radius: 10px;
   cursor: pointer;
-  object-fit: cover;
-  transition: all 0.3s ease;
+  transition:
+    border-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.images-contianer img:hover {
+  border-color: #999;
 }
 
 .active-image {
-  border: 2px solid #000 !important;
+  border: 2px solid #000;
   transform: scale(1.05);
 }
 
@@ -49,7 +62,6 @@
 .product-info {
   display: flex;
   flex-direction: column;
-  gap: 18px;
 }
 
 .product-info h1 {
@@ -64,10 +76,96 @@
   display: flex;
   align-items: center;
   gap: 4px;
+  margin-top: 5px;
 }
 
 .rating img {
-  width: 22px;
+  width: 15px;
+  height: 15px;
+}
+
+.price {
+  font-size: 2rem;
+  margin: 12px 0;
+}
+
+.description {
+  font-size: 1.1rem;
+  color: var(--product-muted-text);
+  margin-top: 0;
+  line-height: 1.6;
+}
+
+.sies-contianer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 16px 0;
+}
+
+.size {
+  min-width: 44px;
+  padding: 6px 14px;
+  font-size: 1rem;
+  border-radius: 4px;
+  border: 1px solid #888;
+  background: #fff;
+  cursor: pointer;
+  transition:
+    border-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.size:hover {
+  border-color: #000;
+}
+
+.selected-size {
+  border: 2px solid #000;
+  font-weight: 500;
+}
+
+.add-to-cart-button {
+  margin-top: 20px;
+  width: 180px;
+  font-size: 1.1rem;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+  padding: 12px;
+  color: #fff;
+  background-color: #000;
+  border: 1px solid #000;
+  border-radius: 8px;
+  cursor: pointer;
+  transition:
+    transform 0.2s ease,
+    opacity 0.2s ease;
+}
+
+.add-to-cart-button:hover {
+  transform: scale(1.03);
+}
+
+.add-to-cart-button:active {
+  transform: scale(0.98);
+}
+
+.add-to-cart-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+  transform: none;
+}
+
+.policys {
+  border-top: 1px solid #ddd;
+  margin-top: 30px;
+  padding-top: 12px;
+}
+
+.policys p {
+  color: var(--product-muted-text);
+  font-size: 0.95rem;
+  margin: 6px 0;
 }
 
 /* Tablet */
@@ -118,6 +216,7 @@
 
   .images-contianer img {
     width: 90px;
+    height: 90px;
     flex-shrink: 0;
   }
 

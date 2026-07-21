@@ -5,8 +5,6 @@ import Title from "../Components/Title";
 import { ShopContext } from "../contexts/shopContext";
 import ProductItem from "../Components/ProductItem";
 
-import Grid from "@mui/material/Grid";
-
 const Collections = () => {
   const categories = ["Men", "Women", "Kids"];
   const typeCategories = ["Topwear", "Bottomwear", "Winterwear"];
@@ -44,32 +42,21 @@ const Collections = () => {
     let productsCopy = products.slice();
 
     if (search && showSearch) {
-      productsCopy = products.filter((item) =>
+      productsCopy = productsCopy.filter((item) =>
         item.name.toLowerCase().includes(search.toLowerCase()),
       );
     }
 
     if (selectedCategories.length > 0) {
-      productsCopy = products.filter((item) =>
+      productsCopy = productsCopy.filter((item) =>
         selectedCategories.includes(item.category),
       );
     }
 
     if (selectedTypeCategories.length > 0) {
-      productsCopy = products.filter((item) =>
+      productsCopy = productsCopy.filter((item) =>
         selectedTypeCategories.includes(item.subCategory),
       );
-    }
-
-    if (selectedCategories.length > 0 && selectedTypeCategories.length > 0) {
-      productsCopy = products.filter((item) => {
-        if (
-          selectedTypeCategories.includes(item.subCategory) &&
-          selectedCategories.includes(item.category)
-        ) {
-          return item;
-        }
-      });
     }
 
     setAllProducts(productsCopy);
@@ -77,7 +64,7 @@ const Collections = () => {
 
   useEffect(() => {
     applyFilter();
-  }, [selectedCategories, selectedTypeCategories, search]);
+  }, [selectedCategories, selectedTypeCategories, search, showSearch]);
 
   return (
     <section className="collections">
@@ -106,7 +93,12 @@ const Collections = () => {
             {categories.map((c) => {
               return (
                 <div key={c} className="category">
-                  <input type="checkbox" value={c} onClick={toggleCategories} />
+                  <input
+                    type="checkbox"
+                    value={c}
+                    onChange={toggleCategories}
+                    checked={selectedCategories.includes(c)}
+                  />
                   <p>{c}</p>
                 </div>
               );
@@ -121,6 +113,7 @@ const Collections = () => {
                     type="checkbox"
                     value={c}
                     onChange={toggleTypeCategories}
+                    checked={selectedTypeCategories.includes(c)}
                   />
                   <p>{c}</p>
                 </div>
@@ -135,17 +128,21 @@ const Collections = () => {
           <Title text1={"ALL"} text2={"COLLECTIONS"} />
         </header>
 
-        <div className="products-grid">
-          {allProducts.map((item) => (
-            <ProductItem
-              key={item._id}
-              id={item._id}
-              name={item.name}
-              image={item.image}
-              price={item.price}
-            />
-          ))}
-        </div>
+        {allProducts.length > 0 ? (
+          <div className="products-grid">
+            {allProducts.map((item) => (
+              <ProductItem
+                key={item._id}
+                id={item._id}
+                name={item.name}
+                image={item.image}
+                price={item.price}
+              />
+            ))}
+          </div>
+        ) : (
+          <p className="no-results">No results found</p>
+        )}
       </div>
     </section>
   );
