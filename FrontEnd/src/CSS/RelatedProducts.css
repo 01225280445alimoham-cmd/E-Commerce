@@ -1,0 +1,93 @@
+.related-products {
+  margin: 60px 0;
+}
+
+.related-products h2 {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 30px;
+  color: #222;
+  font-weight: 600;
+}
+
+.related-products-container {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  padding: 10px 0 20px;
+  scroll-behavior: smooth;
+  scrollbar-width: thin;
+}
+
+.related-products-container::-webkit-scrollbar {
+  height: 8px;
+}
+
+.related-products-container::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 10px;
+}
+
+.related-products-container::-webkit-scrollbar-thumb:hover {
+  background: #999;
+}
+
+.related-products-container > * {
+  flex: 0 0 250px;
+}
+
+/* ================= Tablet ================= */
+@media (max-width: 992px) {
+  .related-products {
+    margin: 50px 0;
+  }
+
+  .related-products h2 {
+    font-size: 1.8rem;
+  }
+
+  .related-products-container {
+    gap: 16px;
+  }
+
+  .related-products-container > * {
+    flex: 0 0 220px;
+  }
+}
+
+/* ================= Mobile ================= */
+@media (max-width: 768px) {
+  .related-products {
+    margin: 40px 0;
+  }
+
+  .related-products h2 {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+  }
+
+  .related-products-container {
+    gap: 12px;
+    padding-bottom: 15px;
+  }
+
+  .related-products-container > * {
+    flex: 0 0 180px;
+  }
+}
+
+/* ================= Small Mobile ================= */
+@media (max-width: 480px) {
+  .related-products h2 {
+    font-size: 1.3rem;
+  }
+
+  .related-products-container {
+    gap: 10px;
+    padding: 5px 0 15px;
+  }
+
+  .related-products-container > * {
+    flex: 0 0 160px;
+  }
+}

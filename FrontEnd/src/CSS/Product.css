@@ -8,8 +8,9 @@
   grid-template-columns: 140px 1fr 1.2fr;
   gap: 40px;
   max-width: 1200px;
-  margin: 40px auto;
+  margin: 40px 0px;
   align-items: start;
+  width: 100%;
 }
 
 /* الصور المصغرة */
@@ -166,6 +167,29 @@
   color: var(--product-muted-text);
   font-size: 0.95rem;
   margin: 6px 0;
+}
+
+.description-and-reviews {
+  display: flex;
+  gap: 0px;
+  align-items: center;
+  font-size: 1.2rem;
+}
+
+.description-and-reviews p,
+b {
+  border: 1px solid gray;
+  padding: 7px 10px;
+}
+
+.description-about-the-web-site {
+  width: 100%;
+  border: 1px solid var(--product-border);
+  padding: 10px 15px;
+}
+
+.description-about-the-web-site p {
+  color: var(--product-muted-text);
 }
 
 /* Tablet */
