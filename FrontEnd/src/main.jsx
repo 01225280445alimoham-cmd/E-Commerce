@@ -5,10 +5,12 @@ import App from "./App.jsx";
 import { BrowserRouter } from "react-router-dom";
 import "./index.css";
 import ShopContextProvider from "./contexts/shopContext.jsx";
+import ScrollToTop from "./ScrollToTop.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <BrowserRouter>
+      <ScrollToTop />
       <ShopContextProvider>
         <App />
       </ShopContextProvider>

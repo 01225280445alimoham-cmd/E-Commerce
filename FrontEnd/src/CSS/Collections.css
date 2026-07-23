@@ -8,6 +8,8 @@
 .right-side {
   flex: 1;
   min-width: 0;
+
+  flex-direction: column;
 }
 
 .products-grid {
@@ -15,6 +17,7 @@
   grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
   gap: 30px;
   width: 100%;
+  margin: 0px;
 }
 
 .no-results {

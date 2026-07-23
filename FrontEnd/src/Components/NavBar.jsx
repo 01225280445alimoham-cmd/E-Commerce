@@ -16,6 +16,7 @@ import { NavLink } from "react-router-dom";
 import { useContext, useState } from "react";
 import Badge from "@mui/material/Badge";
 import { ShopContext } from "../contexts/shopContext";
+import { Link } from "react-router-dom";
 
 const pages = ["Home", "Collections", "About", "Contact"];
 const settings = ["My Profile", "Orders", "Logout"];
@@ -24,7 +25,7 @@ function NavBar() {
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
 
-  const { showSearch, setShowSearch } = useContext(ShopContext);
+  const { showSearch, setShowSearch, getCartCount } = useContext(ShopContext);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -156,9 +157,16 @@ function NavBar() {
               </IconButton>
             </Tooltip>
             <Tooltip title="Cart">
-              <Badge badgeContent={17} color="error">
-                <img src={assets.cart_icon} alt="Cart" width="24" height="24" />
-              </Badge>
+              <Link to="/cart">
+                <Badge badgeContent={getCartCount()} color="primary">
+                  <img
+                    src={assets.cart_icon}
+                    alt="Cart"
+                    width="24"
+                    height="24"
+                  />
+                </Badge>
+              </Link>
             </Tooltip>
 
             <Menu

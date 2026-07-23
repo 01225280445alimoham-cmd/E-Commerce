@@ -6,7 +6,7 @@ import { assets } from "../assets/frontend_assets/assets";
 import RelatedProducts from "../Components/RelatedProducts";
 
 const Product = () => {
-  const { products, currency } = useContext(ShopContext);
+  const { products, currency, addToCart } = useContext(ShopContext);
   const { productId } = useParams();
   const [productData, setProductData] = useState();
   const [selectedImage, setSelectedImage] = useState();
@@ -70,7 +70,14 @@ const Product = () => {
               </button>
             ))}
           </div>
-          <button className="add-to-cart-button">ADD TO CART</button>
+          <button
+            className="add-to-cart-button"
+            onClick={() => {
+              addToCart(productData._id, size);
+            }}
+          >
+            ADD TO CART
+          </button>
 
           <section className="policys">
             <p>100% Original product</p>
