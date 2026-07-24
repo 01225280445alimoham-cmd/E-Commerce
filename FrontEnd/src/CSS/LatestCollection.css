@@ -10,7 +10,10 @@
 
 .latest-collections-header {
   max-width: 700px;
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .latest-collections-description {

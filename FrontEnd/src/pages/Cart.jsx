@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { ShopContext } from "../contexts/shopContext";
 import Title from "../Components/Title";
 import CartItem from "../Components/CartItem";
+import TotalCartAmount from "../Components/TotalCartAmount";
 
 const Cart = () => {
   const { cartItems } = useContext(ShopContext);
@@ -33,9 +34,10 @@ const Cart = () => {
           <CartItem key={`${item.id}-${item.size}`} itemData={item} />
         ))}
       </section>
+      <TotalCartAmount />
     </div>
   ) : (
-    <h1>No Data found</h1>
+    <h1>Cart is Empty</h1>
   );
 };
 
