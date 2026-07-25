@@ -17,7 +17,7 @@ const BestSaller = () => {
 
   return (
     <div className="best-sallers">
-      <div className="header">
+      <div className="best-sallers-header">
         <Title text1={"BEST"} text2={"SALLERS"} />
         <p className="best-sallers-collections-description">
           Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quidem error

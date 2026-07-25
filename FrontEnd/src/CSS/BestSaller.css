@@ -5,12 +5,12 @@
   gap: 30px;
 }
 
-.header {
-  max-width: 700px;
+.best-sallers-header {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  max-width: 700px;
 }
 
 .best-sallers-collections-description {

@@ -42,14 +42,6 @@ const TotalCartAmount = () => {
           </span>
         </div>
       </div>
-      <button
-        className="proceed-button"
-        onClick={() => {
-          navigate("/place-order");
-        }}
-      >
-        PROCEED TO CHECK OUT
-      </button>
     </section>
   );
 };

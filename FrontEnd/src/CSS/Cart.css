@@ -1,0 +1,89 @@
+/* ------- Container ------- */
+.cart-container {
+  padding: 60px 5%;
+  min-height: 60vh;
+}
+
+.cart-empty {
+  text-align: center;
+  padding: 100px 5%;
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: #454545;
+}
+
+/* ------- Cart Items List ------- */
+.cart-items-list {
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* ------- Totals + Checkout Wrapper ------- */
+.cart-bottom {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  margin-top: 40px;
+}
+
+/* ------- Proceed Button ------- */
+.proceed-button {
+  width: 200px;
+  font-size: 1rem;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+  padding: 12px;
+  color: #fff;
+  background-color: #000;
+  border: 1px solid #000;
+  border-radius: 8px;
+  cursor: pointer;
+  transition:
+    transform 0.2s ease,
+    opacity 0.2s ease;
+}
+
+.proceed-button:hover {
+  transform: scale(1.03);
+}
+
+.proceed-button:active {
+  transform: scale(0.98);
+}
+
+/* ==========================
+   Media Queries
+========================== */
+
+@media (max-width: 992px) {
+  .cart-container {
+    padding: 40px 4%;
+  }
+}
+
+@media (max-width: 750px) {
+  .cart-container {
+    padding: 30px 4%;
+  }
+
+  .cart-bottom {
+    align-items: stretch;
+  }
+
+  .proceed-button {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .cart-container {
+    padding: 20px 4%;
+  }
+
+  .cart-empty {
+    font-size: 1.2rem;
+    padding: 60px 4%;
+  }
+}

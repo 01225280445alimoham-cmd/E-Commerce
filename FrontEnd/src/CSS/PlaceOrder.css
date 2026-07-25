@@ -1,0 +1,254 @@
+/* ------- Visually Hidden (for accessible labels) ------- */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.place-order-contianer {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 50px;
+  padding: 60px 5%;
+  flex-wrap: wrap;
+}
+
+/* ------- Left Side ------- */
+.place-order-left-side {
+  flex: 1;
+  min-width: 300px;
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.place-order-left-side .input-row {
+  display: flex;
+  gap: 10px;
+  width: 100%;
+}
+
+.input-field {
+  width: 100%;
+}
+
+.place-order-left-side input {
+  box-sizing: border-box;
+  padding: 12px;
+  border: 1px solid #c5c5c5;
+  border-radius: 4px;
+  outline: none;
+  font-size: 14px;
+  transition: border-color 0.2s ease;
+  width: 100%;
+}
+
+.place-order-left-side input::placeholder {
+  color: #909090;
+}
+
+.place-order-left-side input:focus {
+  border-color: rgb(0, 110, 255);
+}
+
+.place-order-left-side input:invalid:not(:placeholder-shown) {
+  border-color: #e04343;
+}
+
+/* ------- Right Side ------- */
+.palce-order-right-side {
+  flex: 1;
+  min-width: 300px;
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  width: 100%;
+  gap: 25px;
+}
+
+.cart-total-wrapper {
+  width: 100%;
+}
+
+/* ------- Payment Section ------- */
+.payment-section {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 100%;
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+
+.payment-method {
+  border: 1px solid #c5c5c5;
+  border-radius: 6px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  width: 100%;
+  font-size: 1.1rem;
+  font-weight: 600;
+  box-sizing: border-box;
+  padding: 12px 16px;
+  color: #909090;
+  transition: border-color 0.2s ease;
+}
+
+.payment-method:hover {
+  border-color: #454545;
+}
+
+.payment-method:has(.payment-radio:checked) {
+  border-color: #000;
+  color: #000;
+}
+
+.payment-radio {
+  width: 16px;
+  height: 16px;
+  accent-color: #000;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.payment-text {
+  margin: 0;
+}
+
+.payment-logo {
+  object-fit: contain;
+}
+
+.payment-logo-stripe {
+  width: 60px;
+  height: 20px;
+}
+
+.payment-logo-razorpay {
+  width: 90px;
+  height: 20px;
+}
+
+/* ------- Proceed Button ------- */
+.proceed-button {
+  margin-top: 10px;
+  width: 250px;
+  font-size: 1rem;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+  padding: 12px;
+  color: #fff;
+  background-color: #000;
+  border: 1px solid #000;
+  border-radius: 8px;
+  cursor: pointer;
+  transition:
+    transform 0.2s ease,
+    opacity 0.2s ease;
+}
+
+.proceed-button:hover {
+  transform: scale(1.03);
+}
+
+.proceed-button:active {
+  transform: scale(0.98);
+}
+
+.proceed-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* ==========================
+   Media Queries
+========================== */
+
+@media (max-width: 992px) {
+  .place-order-contianer {
+    gap: 30px;
+    padding: 40px 4%;
+  }
+
+  .place-order-left-side,
+  .palce-order-right-side {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 750px) {
+  .place-order-contianer {
+    flex-direction: column;
+    padding: 30px 4%;
+  }
+
+  .place-order-left-side,
+  .palce-order-right-side {
+    width: 100%;
+    min-width: unset;
+    align-items: stretch;
+  }
+
+  .payment-method {
+    font-size: 1rem;
+  }
+
+  .proceed-button {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .place-order-contianer {
+    padding: 20px 4%;
+    gap: 20px;
+  }
+
+  .input-row {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .place-order-left-side input {
+    padding: 10px;
+    font-size: 13px;
+  }
+
+  .payment-method {
+    font-size: 0.9rem;
+    padding: 10px 12px;
+  }
+
+  .payment-logo-stripe {
+    width: 32px;
+  }
+
+  .payment-logo-razorpay {
+    width: 48px;
+  }
+}
+
+@media (max-width: 360px) {
+  .place-order-left-side input {
+    padding: 8px;
+    font-size: 12px;
+  }
+
+  .payment-method {
+    font-size: 0.8rem;
+    gap: 10px;
+  }
+}
