@@ -11,8 +11,18 @@ const CartItem = ({ itemData }) => {
 
   if (!productData) return null;
 
+  const handleQuantityChange = (e) => {
+    const value = e.target.value;
+    if (value === "") return; // نسيب المستخدم يمسح الحقل مؤقتًا وهو بيكتب رقم جديد
+
+    const quantity = Number(value);
+    if (!Number.isInteger(quantity) || quantity < 1) return;
+
+    updateQuantity(itemData.id, itemData.size, quantity);
+  };
+
   return (
-    <div className="container">
+    <div className="cart-item">
       <div className="cart-items-left-side">
         <div className="image-container">
           <img src={productData.image[0]} alt={productData.name} />
@@ -37,26 +47,20 @@ const CartItem = ({ itemData }) => {
           <input
             type="number"
             min="1"
+            step="1"
             value={itemData.quantity}
-            onChange={(e) =>
-              e.target.value === "" || e.target.value === "0"
-                ? null
-                : updateQuantity(
-                    itemData.id,
-                    itemData.size,
-                    Number(e.target.value),
-                  )
-            }
+            onChange={handleQuantityChange}
+            aria-label={`Quantity for ${productData.name}, size ${itemData.size}`}
           />
         </div>
 
         <button
+          type="button"
           className="remove-btn"
-          onClick={() => {
-            deleteCartItem(itemData.id, itemData.size);
-          }}
+          onClick={() => deleteCartItem(itemData.id, itemData.size)}
+          aria-label={`Remove ${productData.name} from cart`}
         >
-          <img src={assets.bin_icon} width={"25px"}></img>
+          <img src={assets.bin_icon} alt="" className="remove-icon" />
         </button>
       </div>
     </div>

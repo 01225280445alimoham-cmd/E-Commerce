@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useMemo } from "react";
 import { ShopContext } from "../contexts/shopContext";
 import Title from "../Components/Title";
 import CartItem from "../Components/CartItem";
@@ -7,48 +7,45 @@ import "../CSS/Cart.css";
 
 const Cart = () => {
   const { cartItems, navigate } = useContext(ShopContext);
-  const [cartData, setCartData] = useState([]);
-
-  useEffect(() => {
-    let temp = [];
-    for (const items in cartItems) {
-      for (const item in cartItems[items]) {
-        if (cartItems[items][item] > 0) {
-          temp.push({
-            id: items,
-            size: item,
-            quantity: cartItems[items][item],
-          });
+  const cartData = useMemo(() => {
+    const temp = [];
+    for (const id in cartItems) {
+      for (const size in cartItems[id]) {
+        if (cartItems[id][size] > 0) {
+          temp.push({ id, size, quantity: cartItems[id][size] });
         }
       }
     }
-    setCartData(temp);
+    return temp;
   }, [cartItems]);
 
-  return cartData.length > 0 ? (
+  return (
     <div className="cart-container">
       <section>
         <Title text1={"YOUR"} text2={"CART"} />
       </section>
-      <section className="cart-items-list">
-        {cartData.map((item) => (
-          <CartItem key={`${item.id}-${item.size}`} itemData={item} />
-        ))}
-      </section>
-      <div className="cart-bottom">
-        <TotalCartAmount />
-        <button
-          className="proceed-button"
-          onClick={() => {
-            navigate("/place-order");
-          }}
-        >
-          PROCEED TO CHECK OUT
-        </button>
-      </div>
+
+      {cartData.length > 0 ? (
+        <>
+          <section className="cart-items-list">
+            {cartData.map((item) => (
+              <CartItem key={`${item.id}-${item.size}`} itemData={item} />
+            ))}
+          </section>
+          <div className="cart-bottom">
+            <TotalCartAmount />
+            <button
+              className="proceed-button"
+              onClick={() => navigate("/place-order")}
+            >
+              PROCEED TO CHECK OUT
+            </button>
+          </div>
+        </>
+      ) : (
+        <p className="cart-empty">Cart is Empty</p>
+      )}
     </div>
-  ) : (
-    <h1 className="cart-empty">Cart is Empty</h1>
   );
 };
 

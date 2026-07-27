@@ -1,4 +1,4 @@
-.container {
+.cart-item {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -11,7 +11,8 @@
   display: flex;
   align-items: center;
   gap: 20px;
-  width: 50%;
+  flex: 1;
+  min-width: 0;
 }
 
 .image-container img {
@@ -25,6 +26,7 @@
   display: flex;
   flex-direction: column;
   gap: 15px;
+  min-width: 0;
 }
 
 .details h3 {
@@ -57,8 +59,8 @@
   display: flex;
   align-items: center;
   gap: 30px;
-  justify-content: space-between;
-  width: 50%;
+  justify-content: flex-end;
+  flex-shrink: 0;
 }
 
 .quantity input {
@@ -75,21 +77,40 @@
   border-color: #222;
 }
 
+/* إخفاء أسهم input number */
+.quantity input::-webkit-inner-spin-button,
+.quantity input::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.quantity input {
+  -moz-appearance: textfield;
+}
+
 .remove-btn {
   border: none;
   background: transparent;
-  font-size: 24px;
   cursor: pointer;
   color: #777;
-  transition: 0.3s;
+  transition: color 0.3s ease;
+  padding: 4px;
 }
 
 .remove-btn:hover {
   color: #d32f2f;
 }
 
+.remove-btn:focus-visible {
+  outline: 2px solid #d32f2f;
+  outline-offset: 2px;
+}
+
+.remove-icon {
+  width: 25px;
+}
+
 @media (max-width: 768px) {
-  .container {
+  .cart-item {
     gap: 15px;
     flex-direction: column;
   }
@@ -123,7 +144,7 @@
     height: 35px;
   }
 
-  .remove-btn {
-    font-size: 20px;
+  .remove-icon {
+    width: 20px;
   }
 }

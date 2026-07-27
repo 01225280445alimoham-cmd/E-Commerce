@@ -1,70 +1,56 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext, useMemo } from "react";
 import "../CSS/Collections.css";
 import { assets } from "../assets/frontend_assets/assets";
 import Title from "../Components/Title";
 import { ShopContext } from "../contexts/shopContext";
 import ProductItem from "../Components/ProductItem";
 
+const CATEGORIES = ["Men", "Women", "Kids"];
+const TYPE_CATEGORIES = ["Topwear", "Bottomwear", "Winterwear"];
+
 const Collections = () => {
-  const categories = ["Men", "Women", "Kids"];
-  const typeCategories = ["Topwear", "Bottomwear", "Winterwear"];
-
   const [showCategory, setShowCategory] = useState(false);
-
   const { products, search, showSearch } = useContext(ShopContext);
-
-  const [allProducts, setAllProducts] = useState([]);
 
   const [selectedCategories, setSelectedCategories] = useState([]);
   const [selectedTypeCategories, setSelectedTypeCategories] = useState([]);
 
-  const toggleCategories = (e) => {
-    if (selectedCategories.includes(e.target.value)) {
-      setSelectedCategories((prev) =>
-        prev.filter((item) => item !== e.target.value),
-      );
-    } else {
-      setSelectedCategories((prev) => [...prev, e.target.value]);
-    }
+  const toggleFilter = (value, setFilterFn) => {
+    setFilterFn((prev) =>
+      prev.includes(value)
+        ? prev.filter((item) => item !== value)
+        : [...prev, value],
+    );
   };
 
-  const toggleTypeCategories = (e) => {
-    if (selectedTypeCategories.includes(e.target.value)) {
-      setSelectedTypeCategories((prev) =>
-        prev.filter((item) => item !== e.target.value),
-      );
-    } else {
-      setSelectedTypeCategories((prev) => [...prev, e.target.value]);
-    }
-  };
-
-  const applyFilter = () => {
-    let productsCopy = products.slice();
+  const allProducts = useMemo(() => {
+    let result = products.slice();
 
     if (search && showSearch) {
-      productsCopy = productsCopy.filter((item) =>
-        item.name.toLowerCase().includes(search.toLowerCase()),
-      );
+      const query = search.toLowerCase();
+      result = result.filter((item) => item.name.toLowerCase().includes(query));
     }
 
     if (selectedCategories.length > 0) {
-      productsCopy = productsCopy.filter((item) =>
+      result = result.filter((item) =>
         selectedCategories.includes(item.category),
       );
     }
 
     if (selectedTypeCategories.length > 0) {
-      productsCopy = productsCopy.filter((item) =>
+      result = result.filter((item) =>
         selectedTypeCategories.includes(item.subCategory),
       );
     }
 
-    setAllProducts(productsCopy);
-  };
-
-  useEffect(() => {
-    applyFilter();
-  }, [selectedCategories, selectedTypeCategories, search, showSearch]);
+    return result;
+  }, [
+    products,
+    search,
+    showSearch,
+    selectedCategories,
+    selectedTypeCategories,
+  ]);
 
   return (
     <section className="collections">
@@ -72,54 +58,57 @@ const Collections = () => {
         <div className="row">
           <h2>Filters</h2>
           <button
+            type="button"
             className="filter-btn"
-            onClick={() => {
-              setShowCategory(!showCategory);
-            }}
+            onClick={() => setShowCategory((prev) => !prev)}
+            aria-expanded={showCategory}
           >
             <img
               src={assets.dropdown_icon}
               alt=""
-              style={{
-                transform: showCategory ? "rotate(90deg)" : "rotate(0deg)",
-                transition: "transform 0.3s ease",
-              }}
+              className={`dropdown-icon ${showCategory ? "rotated" : ""}`}
             />
           </button>
         </div>
+
         <div className={`categorys ${showCategory ? "show" : "hide"}`}>
-          <div className="category-container">
-            <h3>Category</h3>
-            {categories.map((c) => {
-              return (
-                <div key={c} className="category">
-                  <input
-                    type="checkbox"
-                    value={c}
-                    onChange={toggleCategories}
-                    checked={selectedCategories.includes(c)}
-                  />
-                  <p>{c}</p>
-                </div>
-              );
-            })}
-          </div>
-          <div className="category-container">
-            <h3>Type</h3>
-            {typeCategories.map((c) => {
-              return (
-                <div key={c} className="category">
-                  <input
-                    type="checkbox"
-                    value={c}
-                    onChange={toggleTypeCategories}
-                    checked={selectedTypeCategories.includes(c)}
-                  />
-                  <p>{c}</p>
-                </div>
-              );
-            })}
-          </div>
+          <fieldset className="category-container">
+            <legend>
+              <h3>Category</h3>
+            </legend>
+            {CATEGORIES.map((c) => (
+              <label key={c} className="category">
+                <input
+                  type="checkbox"
+                  value={c}
+                  onChange={(e) =>
+                    toggleFilter(e.target.value, setSelectedCategories)
+                  }
+                  checked={selectedCategories.includes(c)}
+                />
+                <span>{c}</span>
+              </label>
+            ))}
+          </fieldset>
+
+          <fieldset className="category-container">
+            <legend>
+              <h3>Type</h3>
+            </legend>
+            {TYPE_CATEGORIES.map((c) => (
+              <label key={c} className="category">
+                <input
+                  type="checkbox"
+                  value={c}
+                  onChange={(e) =>
+                    toggleFilter(e.target.value, setSelectedTypeCategories)
+                  }
+                  checked={selectedTypeCategories.includes(c)}
+                />
+                <span>{c}</span>
+              </label>
+            ))}
+          </fieldset>
         </div>
       </div>
 

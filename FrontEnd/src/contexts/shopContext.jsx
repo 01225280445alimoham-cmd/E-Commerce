@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useState, useContext } from "react";
 import { products } from "../assets/frontend_assets/assets";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
@@ -13,27 +13,18 @@ const ShopContextProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState({});
   const navigate = useNavigate();
 
-  const addToCart = async (itemId, size) => {
+  const addToCart = (itemId, size) => {
     if (!size) {
       toast.error("You must select a product size first");
       return;
     }
 
-    let cartData = structuredClone(cartItems);
+    const cartData = structuredClone(cartItems);
+    cartData[itemId] = cartData[itemId] || {};
+    cartData[itemId][size] = (cartData[itemId][size] || 0) + 1;
 
-    if (cartData[itemId]) {
-      if (cartData[itemId][size]) {
-        cartData[itemId][size] += 1;
-      } else {
-        cartData[itemId][size] = 1;
-      }
-      toast.success("Product added successfuly");
-    } else {
-      cartData[itemId] = {};
-      cartData[itemId][size] = 1;
-      toast.success("Product added successfuly");
-    }
     setCartItems(cartData);
+    toast.success("Product added successfully"); // صح الخطأ الإملائي
   };
 
   const getCartCount = () => {
@@ -49,20 +40,18 @@ const ShopContextProvider = ({ children }) => {
   };
 
   const updateQuantity = (id, size, quantity) => {
-    if (quantity == 0) {
-      return;
-    }
+    if (quantity <= 0) return; // كمان لازم تتأكد إنها مش رقم سالب
+    if (!cartItems[id]) return;
 
-    let temp = structuredClone(cartItems);
-
+    const temp = structuredClone(cartItems);
     temp[id][size] = quantity;
-
     setCartItems(temp);
   };
 
   const deleteCartItem = (id, size) => {
-    const temp = structuredClone(cartItems);
+    if (!cartItems[id]) return;
 
+    const temp = structuredClone(cartItems);
     delete temp[id][size];
 
     if (Object.keys(temp[id]).length === 0) {
@@ -75,7 +64,8 @@ const ShopContextProvider = ({ children }) => {
   const getTotalCartAmount = () => {
     let totalAmount = 0;
     for (const items in cartItems) {
-      let productInfo = products.find((product) => product._id == items);
+      let productInfo = products.find((product) => product._id === items);
+      if (!productInfo) continue;
       for (const item in cartItems[items]) {
         if (cartItems[items][item] > 0) {
           totalAmount += productInfo.price * cartItems[items][item];
@@ -104,5 +94,7 @@ const ShopContextProvider = ({ children }) => {
 
   return <ShopContext.Provider value={value}>{children}</ShopContext.Provider>;
 };
+
+export const useShopContext = () => useContext(ShopContext);
 
 export default ShopContextProvider;
