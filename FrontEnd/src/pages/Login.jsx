@@ -112,7 +112,7 @@ const Login = () => {
               </p>
             ) : (
               <p onClick={() => setCurrentState("Login")}>
-                Do you have account ?{" "}
+                Do you have an account ?{" "}
                 <button type="button" className="login-page__footer-button">
                   Login
                 </button>
