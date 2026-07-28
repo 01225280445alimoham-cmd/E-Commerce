@@ -146,16 +146,18 @@ function NavBar() {
                 />
               </IconButton>
             </Tooltip>
-            <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <img
-                  src={assets.profile_icon}
-                  alt="Profile"
-                  width="24"
-                  height="24"
-                />
-              </IconButton>
-            </Tooltip>
+            <Link to={"/login"}>
+              <Tooltip title="Open settings">
+                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                  <img
+                    src={assets.profile_icon}
+                    alt="Profile"
+                    width="24"
+                    height="24"
+                  />
+                </IconButton>
+              </Tooltip>
+            </Link>
             <Tooltip title="Cart">
               <Link to="/cart">
                 <Badge badgeContent={getCartCount()} color="primary">

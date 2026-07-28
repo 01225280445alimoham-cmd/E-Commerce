@@ -4,7 +4,7 @@ import Home from "./pages/Home";
 import Product from "./pages/Product";
 import Orders from "./pages/Orders";
 import PlaceOrder from "./pages/PlaceOrder";
-import Login from "./pages/login";
+import Login from "./pages/Login";
 import Cart from "./pages/Cart";
 import Collection from "./pages/Collections";
 import About from "./pages/About";
